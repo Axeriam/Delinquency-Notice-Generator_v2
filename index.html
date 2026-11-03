@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Delinquency Notice Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Questrial&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<div id="app">
+<h1>Delinquency notice generator(RPT)</h1>
+<p class="sub"></p>
+<div class="panel"><div class="bar"><div><label for="imp">Import a list (.xlsx, .xls or .csv) in the same format as your delinquency list</label><input id="imp" type="file" accept=".xlsx,.xls,.csv"></div><div><span id="src"></span> <button id="rst" class="sm" hidden>Use built-in list</button></div></div><div id="err" role="alert" style="color:var(--amt);margin-top:6px"></div></div>
+<div class="panel">
+<div class="ctl">
+<div><label for="q">Search taxpayer, TD number, or XPIN</label><input id="q" type="text" placeholder="e.g. Dumlao" autocomplete="off"></div>
+<div><label for="b">Barangay</label><select id="b"><option value="">All barangays</option></select></div>
+<div><label for="min">Minimum total due (₱)</label><input id="min" type="number" min="0" step="100" value="0"></div>
+<div><label for="sort">Sort by</label><select id="sort"><option value="name">Taxpayer name</option><option value="amt">Amount, highest first</option><option value="old">Oldest delinquency first</option></select></div>
+</div>
+</div>
+<details class="panel"><summary>Notice settings</summary>
+<div class="set">
+<div><label for="s-date">Date of notice</label><input id="s-date" type="date"></div>
+<div><label for="s-until">Computation is good until</label><input id="s-until" type="text" placeholder="e.g. DECEMBER 2026"></div>
+<div></div><div></div>
+<div><label for="s-pn">Prepared by</label><input id="s-pn" type="text"></div>
+<div><label for="s-pt">Title</label><input id="s-pt" type="text"></div>
+<div><label for="s-tn">Signed by</label><input id="s-tn" type="text"></div>
+<div><label for="s-tt">Title</label><input id="s-tt" type="text"></div>
+</div></details>
+<div class="panel">
+<div class="bar"><div id="stats"></div><div><button id="clr" class="sm">Clear selection</button> <button id="mk" class="go"></button></div></div>
+<div class="tw"><table class="l"><thead><tr><th><input type="checkbox" id="all" aria-label="Select all results"></th><th>Taxpayer</th><th>Barangay</th><th>TD number</th><th>Lot No.</th><th>Delinquent since</th><th class="r">Total due</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+<div id="more" class="bar" style="justify-content:center;margin-top:10px"></div>
+</div>
+</div>
+<div id="pv"><div class="pvbar"><div><button id="back">Back to list</button> <span id="pvn"></span></div><div><span style="color:var(--mut);font-size:.85rem">Click any text to edit it. Print directly or export a PDF/Word file.</span> <button id="print">Print</button> <button id="pr">Save as PDF</button> <button id="word">Save as Word</button></div></div><div id="notices"></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="script.js"></script></body></html>
